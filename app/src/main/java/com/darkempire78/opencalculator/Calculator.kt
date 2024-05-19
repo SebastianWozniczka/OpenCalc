@@ -25,6 +25,7 @@ var syntax_error = false
 var is_infinity = false
 var require_real_number = false
 
+
 class Calculator(
         private val numberPrecision: Int
     ) {

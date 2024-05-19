@@ -6,6 +6,7 @@ import android.app.Activity
 import android.content.ClipData
 import android.content.ClipboardManager
 import android.content.Intent
+import android.graphics.Color
 import android.os.Build
 import android.os.Bundle
 import android.text.Editable
@@ -31,14 +32,20 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import java.math.BigDecimal
 import java.math.RoundingMode
+import java.text.DecimalFormat
 import java.text.DecimalFormatSymbols
 import java.util.*
+import kotlin.math.round
 
 
 var appLanguage: Locale = Locale.getDefault()
 var currentTheme: Int = 0
 
+
 class MainActivity : AppCompatActivity() {
+
+     var btn1Checked: Int = 0
+
     private lateinit var view: View
 
     private val decimalSeparatorSymbol =
@@ -74,12 +81,65 @@ class MainActivity : AppCompatActivity() {
         // Disable the keyboard on display EditText
         binding.input.showSoftInputOnFocus = false
 
+        binding.btn1Precision?.setOnClickListener {
+            if(btn1Checked != 1) {
+                binding.btn1Precision!!.setBackgroundColor(Color.BLUE)
+                btn1Checked = 1
+                binding.btn2Precision!!.setBackgroundColor(Color.RED)
+                binding.btn3Precision!!.setBackgroundColor(Color.RED)
+                binding.btn4Precision!!.setBackgroundColor(Color.RED)
+            } else {
+                binding.btn1Precision!!.setBackgroundColor(Color.RED)
+                btn1Checked = 0
+            }
+        }
+
+        binding.btn2Precision?.setOnClickListener {
+            if(btn1Checked != 2) {
+                binding.btn2Precision!!.setBackgroundColor(Color.BLUE)
+                btn1Checked = 2
+                binding.btn1Precision!!.setBackgroundColor(Color.RED)
+                binding.btn3Precision!!.setBackgroundColor(Color.RED)
+                binding.btn4Precision!!.setBackgroundColor(Color.RED)
+            } else {
+                binding.btn2Precision!!.setBackgroundColor(Color.RED)
+                btn1Checked = 0
+            }
+        }
+
+        binding.btn3Precision?.setOnClickListener {
+            if(btn1Checked != 3) {
+                binding.btn3Precision!!.setBackgroundColor(Color.BLUE)
+                btn1Checked = 3
+                binding.btn2Precision!!.setBackgroundColor(Color.RED)
+                binding.btn1Precision!!.setBackgroundColor(Color.RED)
+                binding.btn4Precision!!.setBackgroundColor(Color.RED)
+            } else {
+                binding.btn3Precision!!.setBackgroundColor(Color.RED)
+                btn1Checked = 0
+            }
+        }
+
+        binding.btn4Precision?.setOnClickListener {
+            if(btn1Checked != 4) {
+                binding.btn4Precision!!.setBackgroundColor(Color.BLUE)
+                btn1Checked = 4
+                binding.btn2Precision!!.setBackgroundColor(Color.RED)
+                binding.btn3Precision!!.setBackgroundColor(Color.RED)
+                binding.btn1Precision!!.setBackgroundColor(Color.RED)
+            } else {
+                binding.btn4Precision!!.setBackgroundColor(Color.RED)
+                btn1Checked = 0
+            }
+        }
+
         // https://www.geeksforgeeks.org/how-to-detect-long-press-in-android/
         binding.backspaceButton.setOnLongClickListener {
             binding.input.setText("")
             binding.resultDisplay.text = ""
             true
         }
+
 
         // Set default animations and disable the fade out default animation
         // https://stackoverflow.com/questions/19943466/android-animatelayoutchanges-true-what-can-i-do-if-the-fade-out-effect-is-un
@@ -258,6 +318,9 @@ class MainActivity : AppCompatActivity() {
 
     }
 
+
+
+
     fun openAppMenu(view: View) {
         val popup = PopupMenu(this, view)
         val inflater = popup.menuInflater
@@ -391,6 +454,7 @@ class MainActivity : AppCompatActivity() {
                 // Update Display
                 binding.input.setText(newValueFormatted)
 
+
                 // Set cursor position
                 if (isValueInt) {
                     val cursorOffset = newValueFormatted.length - newValue.length
@@ -400,6 +464,8 @@ class MainActivity : AppCompatActivity() {
                 }
             }
         }
+
+
     }
 
     private fun roundResult(result: BigDecimal): BigDecimal {
@@ -478,6 +544,12 @@ class MainActivity : AppCompatActivity() {
                         isDegreeModeActivated
                     )
 
+                if(btn1Checked > 0){
+                    val rounded = calculationResult.setScale(btn1Checked, RoundingMode.UP)
+                    calculationResult = rounded
+
+                }
+
                 // If result is a number and it is finite
                 if (!(division_by_0 || domain_error || syntax_error || is_infinity || require_real_number)) {
 
@@ -508,6 +580,9 @@ class MainActivity : AppCompatActivity() {
                                     decimalSeparatorSymbol
                                 ), decimalSeparatorSymbol, groupingSeparatorSymbol
                             )
+
+
+
                         }
                     }
 
@@ -538,6 +613,8 @@ class MainActivity : AppCompatActivity() {
                 }
             }
         }
+
+
     }
 
     fun keyDigitPadMappingToDisplay(view: View) {
@@ -1002,6 +1079,11 @@ class MainActivity : AppCompatActivity() {
     fun scientistModeSwitchButton(view: View) {
         enableOrDisableScientistMode()
     }
+
+    fun precisionBar(view: View){
+
+    }
+
 
     // Update settings
     override fun onResume() {

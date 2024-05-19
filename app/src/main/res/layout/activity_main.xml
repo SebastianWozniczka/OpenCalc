@@ -130,6 +130,54 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="1dp"
+                    android:layout_weight="0"
+                    android:orientation="vertical">
+
+                    <Button
+                        android:id="@+id/btn1Precision"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="1"
+                        android:backgroundTint="@color/calculation_error_color"
+                        android:textSize="32sp"
+                        >
+                    </Button>
+
+                    <Button
+                        android:id="@+id/btn2Precision"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="2"
+                        android:backgroundTint="@color/calculation_error_color"
+                        android:textSize="32sp"
+                        >
+                    </Button>
+                    <Button
+                        android:id="@+id/btn3Precision"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="3"
+                        android:backgroundTint="@color/calculation_error_color"
+                        android:textSize="32sp"
+                        >
+                    </Button>
+                    <Button
+                        android:id="@+id/btn4Precision"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="4"
+                        android:backgroundTint="@color/calculation_error_color"
+                        android:textSize="32sp"
+                        >
+                    </Button>
+
+                </TableRow>
+
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="1dp"
                     android:layout_weight="0">
 
                     <Button
@@ -582,7 +630,7 @@
                 android:id="@+id/history_recylcle_view"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:layout_marginBottom="32dp"
+                android:layout_marginBottom="2dp"
                 android:background="?attr/history_background_color"
                 app:layout_constraintBottom_toTopOf="@+id/sliding_layout_button"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -593,8 +641,6 @@
                 android:id="@+id/sliding_layout_button"
                 android:layout_width="30dp"
                 android:layout_height="4dp"
-                android:layout_marginTop="24dp"
-                android:layout_marginBottom="15dp"
                 android:background="?attr/text_color"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
